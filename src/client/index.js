@@ -4,6 +4,23 @@ import App from './App.vue'
 import store from './store';
 import router from './router';
 
+const test = async() => {
+    await new Promise((resolve, reject) => {
+        reject('报错');
+        // reject(new Error('报错'));
+        throw new Error('报错');
+    })
+    console.log('下面执行的内容')
+}
+
+test();
+
+
+window.addEventListener('unhandledrejection', function (event) {
+    event.preventDefault();
+    console.log(event, 'event');
+})
+
 // new Vue({
 //     store,
 //     el: '#app',
