@@ -132,8 +132,6 @@ circularLinkList.append('Paul');
 circularLinkList.insert(1, 'Jack');
 circularLinkList.print(); // "Tom,Jack,Peter,Paul"
 
-
-
 // {
 //   element: first,
 //   next: {
