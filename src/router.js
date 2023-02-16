@@ -3,6 +3,8 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 const router = new Router({
+    mode: 'history',
+    base: window.__POWERED_BY_QIANKUN__ ? '/app-react/' : '/',
     routes: [
         {
             path: '/', component: () => import('./components/a.vue'), children: [
