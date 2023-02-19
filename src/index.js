@@ -28,6 +28,8 @@ window.addEventListener("unhandledrejection", function (event) {
 //     // components: { App, 'test': Test },
 // });
 
+window.xxx = 1;
+
 let instance = null;
 function render(props = {}) {
   const { container } = props;
@@ -46,6 +48,8 @@ export async function bootstrap() {
   console.log("[vue] vue app bootstraped");
 }
 export async function mount(props) {
+  console.log(window, 'window');
+  console.log(window.xxx, 'window');
   console.log("[vue] props from main framework", props);
   render(props);
 }

@@ -16,7 +16,7 @@
       :changeMessage="changeMessage"
       @changeAge="age = $event"
     />
-    <div>{{ age }}</div>
+    <div class="search-container">{{ age }}</div>
     <div>{{ publishMessage }}</div>
     <div @click="changeMessage">changeMessage</div>
     <div @click="changeAge(28)">changeAge</div>
@@ -28,12 +28,14 @@
     <h1>================================</h1>
 
     <my-subtraction></my-subtraction>
+    <Modal />
   </div>
 </template>
 <script>
 import Test from "./components/Test.vue";
 import Addition from "./components/Addition.vue";
 import Subtraction from "./components/Subtraction.vue";
+import { Modal } from 'element-ui';
 
 export default {
   components: {

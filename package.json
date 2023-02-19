@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build:client": "webpack --config webpack.config.client.js",
-    "build:server": "webpack --config webpack.config.server.js", 
+    "build:server": "webpack --config webpack.config.server.js",
     "build": "yarn build:client && yarn build:server",
     "dev:client": "webpack-dev-server --config webpack.config.client.js",
     "start": "node ./src/server",
@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "create-react-practice": "^1.0.0",
+    "element-ui": "^2.15.13",
     "lodash": "^4.17.21",
     "typescript": "4.1.6",
     "vue": "^2.6.14",
