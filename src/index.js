@@ -21,6 +21,7 @@ window.addEventListener("unhandledrejection", function (event) {
   console.log(event, "event");
 });
 
+debugger;
 // new Vue({
 //     store,
 //     el: '#app',
@@ -28,7 +29,7 @@ window.addEventListener("unhandledrejection", function (event) {
 //     // components: { App, 'test': Test },
 // });
 
-window.xxx = 1;
+window.xxx = 2;
 
 let instance = null;
 function render(props = {}) {
