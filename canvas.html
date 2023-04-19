@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Fireworks Animation</title>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="750" height="920"></canvas>
+	<script>
+		// 获取canvas元素
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		let x = 350;
+		let y = 736	;
+		let vy = Math.random() * (-35 - -12) - 12;
+		let vx = Math.random() * (-15 - 15) - 15;
+		let ay = Math.random() * (0.5 -0.25) + 0.25;
+		
+		function draw(){
+			  vy = vy + ay;
+				y = y + vy;
+				x = x + vx;
+			// for(let i = 0; i < 10; i++){
+				ctx.save();
+				ctx.beginPath();
+				ctx.translate(x, y);
+				ctx.scale(1, 1);
+				ctx.rotate(0);
+				ctx.moveTo(25.168, 19.6905);
+				ctx.bezierCurveTo(17.244, 13.889, 14.3099, 9.80744, 11.3821, 0.519531);
+				ctx.bezierCurveTo(6.89056, 3.64913, 4.65311, 5.21266, 0.167969, 8.34352);
+				ctx.bezierCurveTo(3.10726, 17.6251, 6.03631, 21.713, 13.959, 27.5195);
+				ctx.bezierCurveTo(18.4454, 24.3899, 20.6828, 22.8264, 25.168, 19.6905);
+				ctx.fillStyle = 'red';
+				// rgbaColor.a = this.opacity;
+				// this.ctx.fillStyle = this.toRgbaStr();
+				ctx.fill();
+				ctx.restore();
+		// }
+		}
+		function animate(){
+			ctx.clearRect(0, 0, 750, 920);
+			draw();
+			window.requestAnimationFrame(animate);
+		}
+		animate();
+		// if(canvas.getContext) {
+    //   // 获取绘图上下文
+    //   var ctx = canvas.getContext('2d');
+    //   // 绘制一条从起点（x: 50, y:50）到 另一个点（x: 200, y:200）的直线
+    //   ctx.moveTo(50, 50);
+    //   ctx.lineTo(200, 200);
+    //   ctx.stroke();
+    // }
+	</script>
+</body>
+</html>
