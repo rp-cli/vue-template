@@ -1,0 +1,74 @@
+react源码中如果一个节点只有一个子节点，而且这个一个子节点是文本节点的话，不会为此子节点创建fiber节点
+构建fiber树，深度优先
+
+
+第一次渲染，先创建一个fiberRoot，然后current指向fiberRoot，然后又创建了一个working Progress，然后用alternate链接，然后再将current指向working Progress 
+第一次更新，就开始轮替使用这两个树
+
+fiberRoot将要渲染的新dom就放在updateQuene里的payload的element
+
+
+fiber和vdom是什么关系
+vdom是createElement创建的，在render阶段会根据vdom创建fiber节点 一个vdom创建一个fiber节点    
+
+fiber的主要目的是 可暂停再恢复
+fiber都是一个工作单元，每完成一个工作单元，会判断浏览器有没有更重要的任务要做
+如果有，就暂停，让浏览器执行渲染之类的更重要的任务，等浏览器忙完再回来render下一个fiber
+
+第一次挂载其实就可以理解为更新，一开始只有一个空的div root，左边的那棵树就是只有一个空的div，然后后面的树才是完整的结构，就是更新
+
+
+更新两个阶段
+    render  根据老的fiber树和新的vdom创建新的fiber树并找出差异，也就是diff的结果
+    commit  根据diff结果更新真实DOM
+    更新完了以后新的fiber树就成为fiberRoot.current
+commit阶段不能中断
+render阶段可以中断
+
+react diff 算法是怎么样的
+domdiff是计算老fiber和新的vdom的差异
+domdiff是在收集副作用链 effectList
+
+单节点 diff
+diff原则  
+同层级之间才会diff
+不同的类型对应不同的元素 type span div
+可以通过key来标识同一个节点
+
+多节点diff
+
+第一轮循环
+如果key不同直接结束本轮循环
+遍历新vdom的时候，在里面用while遍历老fiber的sibling，如果key不同就直接结束本轮循环，
+新dom或者oldFiber遍历完，结束本轮循环
+key相同 type不同，标记老的oldFiber为删除，继续循环
+key相同 type相同，复用老fiber继续循环
+
+第二轮循环
+newChildren遍历完而oldfiber还有，遍历剩下所有的oldFiber标记为删除，DIFF结束
+oldFiber遍历完了，而newChildren还有，将剩下的newChildren标记为插入，DIFF结束
+newChildren和oldFiber都同时遍历完成，diff结束
+newChildren和oldFiber都没有完成，则进行节点移动的结束
+
+第三轮循环
+处理节点移动的情况
+
+A B C D E   结束循环，遍历
+E A B C D
+移动4个
+
+
+首先从rootfiber开始向下优先遍历，为遍历到的每个fiber调用beginwork方法，根据diff算法判断是否是复用还是遍历还是删除，
+打上对应的flags，遍历到没有子节点时，如果没有子节点了，就走completework方法，并且在父fiber的effect链表上添加effect，
+如果父fiber已经有firstEffect了，就将父fiber的effect上放到链表的尾部，一直往上直到根节点，然后根据
+rootFiber上的effect链表去更新dom，把current指针指向构建完成的workingProgress树，也就是新的fiber树
+
+为什么删除的副作用会在最前面
+放到链表前面就先删除了，是怎么放的，那我就不知道了哈哈
+
+setState之后会发生什么
+对应的fiber节点上的updateQuene.shared.pending链表上会插入最新的update，shared.pending是一个单向的环状链表，
+此时shared.pending的环被剪开并连接在updateQueue.lastBaseUpdate后面，updateQueue.baseUpdate链表，
+以fiber.updateQueue.baseState为初始state，依次与遍历到的每个Update计算并产生新的state，state的变化在
+render阶段产生与上次更新不同的vdom，通过Diff算法产生effectTag，在commit阶段渲染在页面上。渲染完成后workInProgress 
+Fiber树变为current Fiber树，整个更新流程结束。
