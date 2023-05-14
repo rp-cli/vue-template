@@ -18,6 +18,7 @@ class Routers {
   }
   _bindPopState() {
     window.addEventListener('popstate', e => {
+      console.log('popstate');
       const path = e.state && e.state.path;
       this.routes[path] && this.routes[path]();
 
