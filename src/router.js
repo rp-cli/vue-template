@@ -4,7 +4,7 @@ Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
-    base: window.__POWERED_BY_QIANKUN__ ? '/app-react/' : '/',
+    base: window.__POWERED_BY_QIANKUN__ ? '/app-vue/' : '/',
     routes: [
         {
             path: '/', component: () => import('./components/a.vue'), children: [

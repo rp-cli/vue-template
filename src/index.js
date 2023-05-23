@@ -21,7 +21,6 @@ window.addEventListener("unhandledrejection", function (event) {
   console.log(event, "event");
 });
 
-debugger;
 // new Vue({
 //     store,
 //     el: '#app',
