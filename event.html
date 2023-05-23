@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div id="parent">
+        父元素
+        <div id="child">子元素</div>
+      </div>
+    </div>
+
+    <script>
+      var parent = document.getElementById("parent");
+      var child = document.getElementById("child");
+
+      // 通过 addEventListener 指定事件的绑定
+      // 第三个参数 true / false 分別代表 捕获/ 冒泡 机制
+
+      parent.addEventListener(
+        "click",
+        function (event) {
+          // event.stopPropagation();
+          console.log("Parent Bubbling");
+        },
+        false
+      );
+
+      parent.addEventListener(
+        "click",
+        function () {
+          event.stopPropagation();
+          console.log("Parent Capturing");
+        },
+        true
+      );
+
+      child.addEventListener(
+        "click",
+        function (event) {
+          // event.stopPropagation();
+          console.log("Child Bubbling");
+        },
+        false
+      );
+
+      child.addEventListener(
+        "click",
+        function () {
+          console.log("Child Capturing");
+        },
+        true
+      );
+    </script>
+  </body>
+</html>
