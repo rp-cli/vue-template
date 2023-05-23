@@ -50,6 +50,8 @@ Router.route('/green', function() {
 });
 
 ul.addEventListener('click', e => {
+  console.log(1);
+  console.log(e.target.tagName, 'e.target.tagName');
   if (e.target.tagName === 'A') {
     e.preventDefault();
     Router.go(e.target.getAttribute('href'));
