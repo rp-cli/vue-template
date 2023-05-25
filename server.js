@@ -38,3 +38,5 @@ function bubbleSort(arr) {
 }
 
 bubbleSort(arr);
+
+window.xxx = 'zzp';
