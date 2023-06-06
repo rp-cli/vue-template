@@ -23,7 +23,7 @@
     <img src="./img/default.png" data-src="./img/9.jpg" />
     <img src="./img/default.png" data-src="./img/10.jpg" />
   </body>
-  <script>
+  <!-- <script>
     function lazyload() {
       let viewHeight = document.body.clientHeight; //获取可视区高度
       let imgs = document.querySelectorAll("img[data-src]");
@@ -62,5 +62,30 @@
       };
     }
     window.addEventListener("scroll", throttle(lazyload, 200));
+  </script> -->
+  <script>
+    const imgs = document.querySelectorAll('img[data-src]')
+    const config = {
+      rootMargin: '0px',
+      threshold: 0,
+    }
+    let observer = new IntersectionObserver((entries, self) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          let img = entry.target
+          let src = img.dataset.src
+          if (src) {
+            img.src = src
+            img.removeAttribute('data-src')
+          }
+          // 解除观察
+          self.unobserve(entry.target)
+        }
+      })
+    }, config)
+
+    imgs.forEach((image) => {
+      observer.observe(image)
+    })
   </script>
 </html>
