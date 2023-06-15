@@ -94,7 +94,7 @@ TS -> 重载(vue3.0)、泛型（概率小一点）
 diff(oldVnode, newVnode) {
     patch()
 }
-4.2.4：路由：vue-router、react-router（hash 、 pushState）
+4.2.4：路由：vue-router、react-router（hash、pushState）
 onpopstate / onhashchange
 4.2.5：数据流框架：redux / mobx / vuex（希望能手写）
 -------
