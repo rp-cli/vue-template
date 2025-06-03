@@ -2,7 +2,8 @@ react源码中如果一个节点只有一个子节点，而且这个一个子节
 构建fiber树，深度优先
 
 
-第一次渲染，先创建一个fiberRoot，然后current指向fiberRoot，然后又创建了一个working Progress，然后用alternate链接，然后再将current指向working Progress 
+第一次渲染，先创建一个fiberRoot，然后current指向fiberRoot，然后又创建了一个working Progress，然后用alternate链接，
+然后再将current指向working Progress 
 第一次更新，就开始轮替使用这两个树
 
 fiberRoot将要渲染的新dom就放在updateQuene里的payload的element    
@@ -11,6 +12,7 @@ fiber的主要目的是 可暂停再恢复
 fiber都是一个工作单元，每完成一个工作单元，会判断浏览器有没有更重要的任务要做
 如果有，就暂停，让浏览器执行渲染之类的更重要的任务，等浏览器忙完再回来render下一个fiber
 
-第一次挂载其实就可以理解为更新，一开始只有一个空的div root，左边的那棵树就是只有一个空的div，然后后面的树才是完整的结构，就是更新
+第一次挂载其实就可以理解为更新，一开始只有一个空的div root，左边的那棵树就是只有一个空的div，
+然后后面的树才是完整的结构，就是更新
 
 jiangjiangjiang
